@@ -10,7 +10,7 @@ do
 
     for path in $(find /home/$hostel/*/* -maxdepth 0 -regextype sed -regex ".*/[A-Z][a-z]*")
     do 
-        ln -s /home/$hostel/announcements.txt $path/announcments #creates the appropriate links to files to be acessed by the students
+        ln -s /home/$hostel/announcements.txt $path/announcments #creates the appropriate links to files to be accessed by the students
         ln -s /home/$hostel/feeDefaulters.txt $path/feeDefaulters
         ln -s /home/HAD/mess.txt $path/mess 
     done
