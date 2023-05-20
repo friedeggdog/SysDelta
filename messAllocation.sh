@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if id -nG "$USER" | grep -qw "Student"
+if id -nG "$USER" | grep -qw "Student" #ask and load the messes to the userdetails file
 then 
     if [ $(cat ~/userDetails.txt | awk '{print $6}') == '-' ]
     then
@@ -18,7 +18,7 @@ then
     fi
 elif id -nG "$USER" | grep -qw "HAD"
 then
-    messes=($(echo $(awk '{if (NR==2 || NR==3 || NR==4){print $2}}' ~/mess.txt)))
+    messes=($(echo $(awk '{if (NR==2 || NR==3 || NR==4){print $2}}' ~/mess.txt))) #takes the no of mess seats into a list
     month=$(date +%b)
     for i in $(cat ~/mess.txt | tail -n +6)
     do  
@@ -29,7 +29,7 @@ then
         p3=${pref:2:1}
         for p in $p1 $p2 $p3
         do 
-            if [ ${messes[$(( $p - 1 ))]} -gt 0 ]
+            if [ ${messes[$(( $p - 1 ))]} -gt 0 ] #assigns mess,month and resets the preference
             then   
                 echo $(awk -v p="$p" -v month="$month" '{if (NR==1) $5=p;$6="-";$7=month; print $0}' $filepath) > $filepath
                 messes[$(( $p - 1 ))]=$(( ${messes[$(( $p - 1 ))]} - 1 ))
@@ -38,7 +38,7 @@ then
         done
     done
 
-    for y in /home/*/*/*/userDetails.txt
+    for y in /home/*/*/*/userDetails.txt #assigns messes for students who havent filled in their preferences
     do
         for x in 1 2 3
         do
