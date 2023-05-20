@@ -2,7 +2,7 @@
 
 if date -d $1 &>/dev/null 
 then
-    if id -nG "$USER" | grep -qw "Student"
+    if id -nG "$USER" | grep -qw "Student" #student makes leave request
     then
         hostel=$(awk '{print $3}' ~/userDetails.txt)
         echo "$USER $hostel $1 -" >> /home/HAD/leave.txt #name hostel dateofleave status(late/ontime/y/n)
@@ -11,7 +11,7 @@ then
     fi
 elif [ -z $1 ]
 then
-    if id -nG "$USER" | grep -qw "Student"
+    if id -nG "$USER" | grep -qw "Student" #convert the y to late or ontime
     then
         lineno=$(grep -n -e "^$USER.*y$" /home/HAD/leave.txt | cut -f1 -d:)
         line=($(grep -n -e "^$USER.*y$" /home/HAD/leave.txt))
@@ -24,7 +24,7 @@ then
         else
             echo "$(awk -v lineno=$lineno '{if (NR==lineno){print $1, $2, $3, "ONTIME" } else {print $0}}' /home/HAD/leave.txt)" > /home/HAD/leave.txt 
         fi
-    elif id -nG "$USER" | grep -qw "Warden"
+    elif id -nG "$USER" | grep -qw "Warden" #auto ask the warden for permission (y or n)
     then
         while read i <&3
         do
