@@ -26,7 +26,7 @@ then
             14) dept='PRD';;
             *) dept='ERROR';;
         esac
-        useradd -m -d /home/${line[2]}/"$((${line[3]}+1))"/${line[0]}/ -G Student "${line[0]}"
+        useradd -m -d /home/${line[2]}/"$((${line[3]}+1))"/${line[0]}/ -G Student "${line[0]}" #creates the user based on given details and the appropiate files
         touch /home/${line[2]}/"$((${line[3]}+1))"/${line[0]}/userDetails.txt /home/${line[2]}/"$((${line[3]}+1))"/${line[0]}/fees.txt
         echo ${line[@]} - 20${line[1]:4:2} $dept > /home/${line[2]}/"$((${line[3]}+1))"/${line[0]}/userDetails.txt
         
